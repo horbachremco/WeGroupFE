@@ -1,16 +1,49 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "John Doe",
+      "name": "John Does",
       "email": "john@example.com",
-      "role": "Admin"
+      "role": "Admin",
+      "id": 1
     },
     {
       "id": 2,
       "name": "Jane Smith",
       "email": "jane@example.com",
-      "role": "User"
+      "role": "User",
+      "isActive": true
+    },
+    {
+      "name": "Remco Horbach",
+      "email": "horbachremco@gmail.com",
+      "role": "User",
+      "id": 3
+    },
+    {
+      "name": "aaaa",
+      "email": "aaaaaa@gmail.com",
+      "role": "User",
+      "id": 4,
+      "isActive": true
+    },
+    {
+      "name": "Test",
+      "email": "test@gmail.com",
+      "role": "User",
+      "id": 5
+    },
+    {
+      "name": "prepre",
+      "email": "prepre@gmail.com",
+      "role": "User",
+      "id": 6
+    },
+    {
+      "name": "Mike Browns",
+      "email": "mikebrown@gmail.com",
+      "role": "Admin",
+      "isActive": true,
+      "id": 7
     }
   ]
 }

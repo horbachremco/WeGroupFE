@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -17,19 +19,6 @@ a {
 
 a:hover {
   text-decoration: underline;
-}
-
-button {
-  background-color: #FF8000;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #f49536;
 }
 
 .container {
