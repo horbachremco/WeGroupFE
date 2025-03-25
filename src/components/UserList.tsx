@@ -157,26 +157,25 @@ export const UserList = () => {
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-700"
                 onClick={() => handleSort('name')}
               >
-                Name
+                Name {sortField === 'name' && (sortDirection === 'asc' ? '↑' : '↓')}
               </th>
               <th
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-700"
                 onClick={() => handleSort('email')}
               >
-                Email
+                Email {sortField === 'email' && (sortDirection === 'asc' ? '↑' : '↓')}
               </th>
               <th
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-700"
                 onClick={() => handleSort('role')}
               >
-                Role
+                Role {sortField === 'role' && (sortDirection === 'asc' ? '↑' : '↓')}
               </th>
               <th
                 scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-700"
-                onClick={() => handleSort('isActive')}
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
                 Status
               </th>

@@ -2,7 +2,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchUser, updateUser, ApiError } from '../services/api';
 import { User } from '../types/user';
-import { ArrowLeftIcon, UserCircleIcon, CalendarIcon, ClockIcon, ShieldCheckIcon, EnvelopeIcon, KeyIcon, CheckCircleIcon, XMarkIcon, PowerIcon, PencilIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftIcon, UserCircleIcon, CalendarIcon, ClockIcon, ShieldCheckIcon, PowerIcon, PencilIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 import { Modal } from './Modal';
 import { Toast } from './Toast';
@@ -127,7 +127,7 @@ export const UserDetail = () => {
       <div className="flex items-center gap-4">
         <button
           onClick={() => navigate('/')}
-          className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+          className="p-2 rounded-full hover:bg-gray-100 transition-colors cursor-pointer"
         >
           <ArrowLeftIcon className="w-5 h-5 text-gray-600" />
         </button>
@@ -147,7 +147,7 @@ export const UserDetail = () => {
                     <h2 className="text-2xl font-semibold text-gray-900">{user.name}</h2>
                     <button
                       onClick={() => setShowEditModal(true)}
-                      className="p-1 rounded-full hover:bg-gray-100 transition-colors"
+                      className="p-1 rounded-full hover:bg-gray-100 transition-colors cursor-pointer"
                       title="Edit user details"
                     >
                       <PencilIcon className="w-4 h-4 text-gray-500" />
@@ -207,24 +207,10 @@ export const UserDetail = () => {
           <div className="lg:col-span-8 bg-white rounded-lg border border-gray-100 overflow-hidden transition-all duration-200 hover:border-gray-200">
             <div className="p-6">
               <h4 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h4>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <button 
-                  className="flex flex-col items-center justify-center p-4 rounded-lg border border-gray-100 hover:border-orange-200 hover:bg-orange-50 transition-all duration-150"
-                  title="Send a message to this user"
-                >
-                  <EnvelopeIcon className="w-6 h-6 text-orange-500 mb-2" />
-                  <span className="text-sm text-gray-600">Send Message</span>
-                </button>
-                <button 
-                  className="flex flex-col items-center justify-center p-4 rounded-lg border border-gray-100 hover:border-orange-200 hover:bg-orange-50 transition-all duration-150"
-                  title="Reset user's password"
-                >
-                  <KeyIcon className="w-6 h-6 text-orange-500 mb-2" />
-                  <span className="text-sm text-gray-600">Reset Password</span>
-                </button>
+              <div className="grid grid-cols-2 gap-4">
                 <button 
                   onClick={() => setShowRoleModal(true)}
-                  className="flex flex-col items-center justify-center p-4 rounded-lg border border-gray-100 hover:border-orange-200 hover:bg-orange-50 transition-all duration-150"
+                  className="flex flex-col items-center justify-center p-4 rounded-lg border border-gray-100 hover:border-orange-200 hover:bg-orange-50 transition-all duration-150 cursor-pointer"
                   title="Change user's role"
                   disabled={updateUserMutation.isPending}
                 >
@@ -233,7 +219,7 @@ export const UserDetail = () => {
                 </button>
                 <button 
                   onClick={handleToggleStatus}
-                  className={`flex flex-col items-center justify-center p-4 rounded-lg border transition-all duration-150 ${
+                  className={`flex flex-col items-center justify-center p-4 rounded-lg border transition-all duration-150 cursor-pointer ${
                     user.isActive
                       ? 'border-green-200 bg-green-50 hover:border-green-300'
                       : 'border-red-200 bg-red-50 hover:border-red-300'
@@ -278,7 +264,7 @@ export const UserDetail = () => {
           <div className="grid grid-cols-2 gap-4">
             <button
               onClick={() => handleRoleChange('Admin')}
-              className={`p-4 rounded-lg border transition-all duration-150 ${
+              className={`p-4 rounded-lg border transition-all duration-150 cursor-pointer ${
                 selectedRole === 'Admin'
                   ? 'border-orange-500 bg-orange-50'
                   : 'border-gray-200 hover:border-orange-200 hover:bg-orange-50'
@@ -296,7 +282,7 @@ export const UserDetail = () => {
             </button>
             <button
               onClick={() => handleRoleChange('User')}
-              className={`p-4 rounded-lg border transition-all duration-150 ${
+              className={`p-4 rounded-lg border transition-all duration-150 cursor-pointer ${
                 selectedRole === 'User'
                   ? 'border-orange-500 bg-orange-50'
                   : 'border-gray-200 hover:border-orange-200 hover:bg-orange-50'
@@ -320,14 +306,14 @@ export const UserDetail = () => {
                 setShowRoleModal(false);
                 setSelectedRole(null);
               }}
-              className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none"
+              className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none cursor-pointer"
             >
               Cancel
             </button>
             <button
               onClick={handleSaveRole}
               disabled={!selectedRole || updateUserMutation.isPending}
-              className={`px-4 py-2 text-sm font-medium text-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 ${
+              className={`px-4 py-2 text-sm font-medium text-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 cursor-pointer ${
                 !selectedRole || updateUserMutation.isPending
                   ? 'bg-gray-300 cursor-not-allowed'
                   : 'bg-orange-500 hover:bg-orange-600'
@@ -372,14 +358,14 @@ export const UserDetail = () => {
                 setShowConfirmModal(false);
                 setActionType(null);
               }}
-              className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none"
+              className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none cursor-pointer"
             >
               Cancel
             </button>
             <button
               onClick={handleConfirmAction}
               disabled={updateUserMutation.isPending}
-              className={`px-4 py-2 text-sm font-medium text-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 ${
+              className={`px-4 py-2 text-sm font-medium text-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 cursor-pointer ${
                 updateUserMutation.isPending
                   ? 'bg-gray-300 cursor-not-allowed'
                   : 'bg-orange-500 hover:bg-orange-600'
