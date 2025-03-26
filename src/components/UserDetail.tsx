@@ -2,7 +2,17 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchUser, updateUser, ApiError } from '../services/api';
 import { User } from '../types/user';
-import { ArrowLeftIcon, UserCircleIcon, CalendarIcon, ClockIcon, ShieldCheckIcon, PowerIcon, PencilIcon } from '@heroicons/react/24/outline';
+import { 
+  ArrowLeftIcon, 
+  UserCircleIcon, 
+  CalendarIcon, 
+  ClockIcon, 
+  ShieldCheckIcon, 
+  PowerIcon, 
+  PencilIcon, 
+  HashtagIcon,
+  UserIcon
+} from '@heroicons/react/24/outline';
 import { useState } from 'react';
 import { Modal } from './Modal';
 import { Toast } from './Toast';
@@ -21,6 +31,7 @@ export const UserDetail = () => {
     type: 'info',
     message: '',
   });
+  const [confirmStatusTime, setConfirmStatusTime] = useState<string | null>(null);
   const queryClient = useQueryClient();
 
   const { data: user, isLoading, error } = useQuery<User>({
@@ -60,6 +71,7 @@ export const UserDetail = () => {
       setShowConfirmModal(false);
       setSelectedRole(null);
       setActionType(null);
+      setConfirmStatusTime(null);
     },
   });
 
@@ -75,6 +87,17 @@ export const UserDetail = () => {
 
   const handleToggleStatus = () => {
     if (!user) return;
+    
+    const now = new Date();
+    const formattedDateTime = now.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric'
+    });
+    
+    setConfirmStatusTime(formattedDateTime);
     setActionType('status');
     setShowConfirmModal(true);
   };
@@ -91,6 +114,7 @@ export const UserDetail = () => {
       updateUserMutation.mutate({
         ...user,
         isActive: !user.isActive,
+        activeStatusDate: confirmStatusTime || undefined
       });
     }
   };
@@ -124,19 +148,19 @@ export const UserDetail = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-4">
-        <button
-          onClick={() => navigate('/')}
-          className="p-2 rounded-full hover:bg-gray-100 transition-colors cursor-pointer"
-        >
-          <ArrowLeftIcon className="w-5 h-5 text-gray-600" />
-        </button>
-        <h1 className="text-2xl font-semibold text-gray-900">User Details</h1>
-      </div>
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="flex items-center gap-4 mb-6">
+          <button
+            onClick={() => navigate('/')}
+            className="p-2 rounded-full hover:bg-gray-100 transition-colors cursor-pointer"
+          >
+            <ArrowLeftIcon className="w-5 h-5 text-gray-600" />
+          </button>
+          <h1 className="text-2xl font-semibold text-gray-900">User Details</h1>
+        </div>
 
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-8 gap-6">
-          <div className="lg:col-span-4 bg-white rounded-lg border border-gray-100 overflow-hidden transition-all duration-200 hover:border-gray-200">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="bg-white rounded-lg border border-gray-100 overflow-hidden transition-all duration-200 hover:border-gray-200">
             <div className="p-6">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-16 h-16 rounded-full bg-orange-50 flex items-center justify-center">
@@ -178,7 +202,7 @@ export const UserDetail = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-4 bg-white rounded-lg border border-gray-100 overflow-hidden transition-all duration-200 hover:border-gray-200">
+          <div className="bg-white rounded-lg border border-gray-100 overflow-hidden transition-all duration-200 hover:border-gray-200">
             <div className="p-6">
               <h4 className="text-lg font-semibold text-gray-900 mb-4">Activity</h4>
               <div className="space-y-4">
@@ -188,23 +212,43 @@ export const UserDetail = () => {
                   </div>
                   <div>
                     <p className="text-sm text-gray-900">Joined</p>
-                    <p className="text-sm text-gray-500">January 1, 2024</p>
+                    <p className="text-sm text-gray-500">{user.joinDate || "January 1, 2024"}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center">
-                    <ClockIcon className="w-4 h-4 text-orange-500" />
+                    <HashtagIcon className="w-4 h-4 text-orange-500" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-900">Last Active</p>
-                    <p className="text-sm text-gray-500">2 hours ago</p>
+                    <p className="text-sm text-gray-900">ID</p>
+                    <p className="text-sm text-gray-500">#{user.id}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center">
+                    <UserIcon className="w-4 h-4 text-orange-500" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-900">Account Status</p>
+                    <p className="text-sm text-gray-500">
+                      {user.isActive ? 'Active' : 'Inactive'} since {user.activeStatusDate || "January 1, 2024"}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center">
+                    <ShieldCheckIcon className="w-4 h-4 text-orange-500" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-900">Role Assignment</p>
+                    <p className="text-sm text-gray-500">{user.role} privileges</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="lg:col-span-8 bg-white rounded-lg border border-gray-100 overflow-hidden transition-all duration-200 hover:border-gray-200">
+          <div className="lg:col-span-2 bg-white rounded-lg border border-gray-100 overflow-hidden transition-all duration-200 hover:border-gray-200">
             <div className="p-6">
               <h4 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h4>
               <div className="grid grid-cols-2 gap-4">

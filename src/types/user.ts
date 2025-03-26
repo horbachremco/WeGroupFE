@@ -4,4 +4,6 @@ export interface User {
   email: string;
   role: 'Admin' | 'User';
   isActive: boolean;
+  joinDate?: string;
+  activeStatusDate?: string;
 } 

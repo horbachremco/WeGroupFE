@@ -1,49 +1,58 @@
 {
   "users": [
     {
-      "name": "John Does",
+      "id": 1,
+      "name": "John Doe",
       "email": "john@example.com",
       "role": "Admin",
-      "id": 1
+      "isActive": true,
+      "joinDate": "January 1, 2024",
+      "activeStatusDate": "January 1, 2024 at 9:00 AM"
     },
     {
       "id": 2,
       "name": "Jane Smith",
       "email": "jane@example.com",
       "role": "User",
-      "isActive": true
+      "isActive": false,
+      "joinDate": "January 15, 2024",
+      "activeStatusDate": "March 5, 2024 at 2:30 PM"
+    },
+    {
+      "id": 3,
+      "name": "Mike Johnson",
+      "email": "mike@example.com",
+      "role": "Admin",
+      "isActive": true,
+      "joinDate": "February 10, 2024",
+      "activeStatusDate": "February 10, 2024 at 11:15 AM"
+    },
+    {
+      "id": 4,
+      "name": "Sarah Williams",
+      "email": "sarah@example.com",
+      "role": "User",
+      "isActive": true,
+      "joinDate": "March 1, 2024",
+      "activeStatusDate": "March 1, 2024 at 3:45 PM"
+    },
+    {
+      "id": 5,
+      "name": "David Brown",
+      "email": "david@example.com",
+      "role": "User",
+      "isActive": false,
+      "joinDate": "February 5, 2024",
+      "activeStatusDate": "March 20, 2024 at 10:00 AM"
     },
     {
       "name": "Remco Horbach",
       "email": "horbachremco@gmail.com",
       "role": "User",
-      "id": 3
-    },
-    {
-      "name": "aaaa",
-      "email": "aaaaaa@gmail.com",
-      "role": "User",
-      "id": 4,
-      "isActive": true
-    },
-    {
-      "name": "Test",
-      "email": "test@gmail.com",
-      "role": "User",
-      "id": 5
-    },
-    {
-      "name": "prepre",
-      "email": "prepre@gmail.com",
-      "role": "User",
-      "id": 6
-    },
-    {
-      "name": "Mike Browns",
-      "email": "mikebrown@gmail.com",
-      "role": "Admin",
       "isActive": true,
-      "id": 7
+      "joinDate": "March 26, 2025",
+      "activeStatusDate": "March 26, 2025 at 5:22 PM",
+      "id": 6
     }
   ]
 }

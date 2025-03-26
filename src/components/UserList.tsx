@@ -91,6 +91,11 @@ export const UserList = () => {
   const sortedUsers = [...users].sort((a, b) => {
     const aValue = a[sortField];
     const bValue = b[sortField];
+    
+    if (aValue === undefined && bValue === undefined) return 0;
+    if (aValue === undefined) return sortDirection === 'asc' ? -1 : 1;
+    if (bValue === undefined) return sortDirection === 'asc' ? 1 : -1;
+    
     if (typeof aValue === 'string') {
       return sortDirection === 'asc' 
         ? aValue.localeCompare(bValue as string)
@@ -141,7 +146,7 @@ export const UserList = () => {
             setEditingUser(null);
             setIsModalOpen(true);
           }}
-          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 cursor-pointer"
         >
           <PlusIcon className="h-5 w-5 mr-2" />
           Add User

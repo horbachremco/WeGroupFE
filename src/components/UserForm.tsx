@@ -31,7 +31,28 @@ export const UserForm = ({ onSubmit, onClose, initialData, mode }: UserFormProps
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(mode === 'edit' ? { ...formData, id: initialData!.id } : formData);
+    if (mode === 'edit') {
+      onSubmit({ ...formData, id: initialData!.id });
+    } else {
+      const now = new Date();
+      const formattedDate = now.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+      const formattedDateTime = now.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric'
+      });
+      onSubmit({ 
+        ...formData,
+        joinDate: formattedDate,
+        activeStatusDate: formattedDateTime 
+      });
+    }
     setFormData({ name: '', email: '', role: 'User' as UserRole, isActive: true });
     onClose();
   };
